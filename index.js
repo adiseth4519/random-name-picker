@@ -11,12 +11,12 @@ function loadNames() {
 }
 
 app.get('/join', (req, res) => {
-  const user = req.query.user;
+  const user = req.query.user?.toLowerCase();
   if (!user) return res.send('No user');
   const names = loadNames();
   if (!names.includes(user)) {
     names.push(user);
-    fs.writeFileSync(FILE, JSON.stringify(names));
+    fs.writeFileSync(FILE, JSON.stringify(names, null, 2));
     return res.send(`${user} added ✅`);
   }
   res.send(`${user} is already joined`);
