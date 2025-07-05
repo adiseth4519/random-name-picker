@@ -33,6 +33,11 @@ app.get('/reset', (req, res) => {
   fs.writeFileSync(FILE, JSON.stringify([]));
   res.send('List has been reset');
 });
+app.get('/list', (req, res) => {
+  const names = loadNames();
+  res.send(names.join('\n')); // Plain text, one name per line
+});
+
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
